@@ -1,22 +1,26 @@
 [build]
   publish = "."
 
-# API proxy → Render
 [[redirects]]
   from = "/api/*"
   to = "https://vvc-office-v4.onrender.com/api/:splat"
   status = 200
   force = true
 
-# Root → home
 [[redirects]]
   from = "/"
   to = "https://vvc-office-v4.onrender.com/page/home"
   status = 200
   force = true
 
-# All pages → backend
 [[redirects]]
   from = "/*"
   to = "https://vvc-office-v4.onrender.com/page/:splat"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
